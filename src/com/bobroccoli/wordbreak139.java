@@ -26,6 +26,21 @@ public class wordbreak139 {
         }
         return false;
     }
+    //Solution with HashSet
+    public boolean wordBreaKImprove(String s, List<String> wordDict) {
+    	if(s.length()==0)
+    		return true;
+    	Set<String> set = new HashSet<String>();
+		for (String string : wordDict) {
+			set.add(string);
+		}
+		for(int i = 1; i <= s.length(); i++) {
+			if(set.contains(s.substring(0, i)) 
+					&& wordBreaKImprove(s.substring(i, s.length()), wordDict))
+				return true;
+		}
+		return false;
+    }
     // DP solution
     public boolean wordBreak(String s, List<String> wordList) {
 		Set<String> set = new HashSet<String>();
