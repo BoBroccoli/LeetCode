@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class wordbreak139 {
+public class Wordbreak139 {
 	//recursive solution bad performance
 	public boolean wordBreakRecersive(String s, List<String> wordDict) {
         if(s==null)
