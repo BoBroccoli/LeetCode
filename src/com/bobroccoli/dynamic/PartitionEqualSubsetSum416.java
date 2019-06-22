@@ -1,6 +1,6 @@
 package com.bobroccoli.dynamic;
 
-public class PartitionEqualSubsetSum {
+public class PartitionEqualSubsetSum416 {
 	public boolean canPartition(int[] nums) {
 		//so find the subset add up to the half of the total
 		int total = 0;
