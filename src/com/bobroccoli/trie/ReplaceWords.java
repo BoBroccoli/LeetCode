@@ -14,14 +14,15 @@ public class ReplaceWords {
         TrieNode root = new TrieNode();
     	buildTrie(root, dict);
     	String[] strings = sentence.split(" ");
-    	for(String string : strings) {
+    	for(int j = 0; j < strings.length; j++) {
     		TrieNode cur = root;
-    		char[] chars = string.toCharArray();
+    		char[] chars = strings[j].toCharArray();
     		for(int i = 0; i < chars.length; ++i) {
     			if(cur.children[chars[i]-'a'] == null || cur.word != null)
     				break;
+    			cur = cur.children[chars[i]-'a'];
     		}
-    		string = cur.word == null ? string : cur.word;
+    		strings[j] = cur.word == null ? strings[j] : cur.word;
     	}
     	StringBuilder sBuilder = new StringBuilder();
     	for(String string : strings) {
