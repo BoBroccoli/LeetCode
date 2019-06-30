@@ -3,8 +3,6 @@ package com.bobroccoli.permutation;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.org.apache.xml.internal.utils.Trie;
-
 public class LetterCasePermutation784 {
     public List<String> letterCasePermutation(String S) {
         List<String> res = new ArrayList<String>();
