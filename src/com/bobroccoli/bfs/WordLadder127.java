@@ -40,42 +40,47 @@ public class WordLadder127 {
 	}
 	//double ended BST
 	public int ladderLengthTwo(String beginWord, String endWord, List<String> wordList) {
-		int res = 0;
-		if (wordList == null || wordList.size() == 0)
-			return res;
-		Set<String> startq = new HashSet<String>();
-		Set<String> endq = new HashSet<String>();
-		Set<String> visited = new HashSet<>();
-		startq.add(beginWord);
-		visited.add(beginWord);
-		res++;
-		endq.add(endWord);
-		visited.add(endWord);
-		while (!startq.isEmpty() && !endq.isEmpty()) {
-			Set<String> curSet = startq;
-			Set<String> targetSet = endq;
-			if(res % 2 == 0) {
-				curSet = endq;
-				targetSet = startq;
-			}
-			Set<String> temp = new HashSet<>();
-			for(String string : curSet) {
-				if(targetSet.contains(string))
-					return res;
-				for(int i = 0; i < wordList.size(); i++) {
-					if(!visited.contains(wordList.get(i)) && oneDistance(wordList.get(i), string)) {
-						if(res % 2 ==0) {
-							endq = temp;
-							visited.add(wordList.get(i));
-						}
-						else
-							startq = temp;
-					}
-				}
-			}
-			++res;
-		}
-		return 0;
+		int res = 1;
+        Set<String> start = new HashSet<String>();
+        Set<String> end = new HashSet<String>();
+        start.add(beginWord);
+        end.add(endWord);
+        Set<String> visited = new HashSet<String>();
+        Set<String> wordSet = new HashSet<String>();
+        
+        for(String string : wordList)
+            wordSet.add(string);
+        if(!wordSet.contains(endWord))
+            return 0;
+        while(!start.isEmpty() && !end.isEmpty()){
+            if(start.size() > end.size()){
+                Set<String> temp = start;
+                start = end;
+                end = temp;
+            }
+            Set<String> temp = new HashSet<String>();
+            for(String string : start){
+                char[] chars = string.toCharArray();
+                for(int i = 0; i < chars.length; ++i){
+                    for(char c = 'a'; c <= 'z'; ++c){
+                        char oldC = chars[i];
+                        chars[i] = c;
+                        String permute = new String(chars);
+                        
+                        if(end.contains(permute))
+                            return res+1;
+                        if(!visited.contains(permute) && wordSet.contains(permute)){
+                            temp.add(permute);
+                            visited.add(permute);
+                        }
+                        chars[i] = oldC;
+                    }
+                }
+            }
+            start = temp;
+            ++res;
+        }
+        return 0;
 	}
 	public boolean oneDistance(String a, String b) {
 		if (a.length() != b.length())
