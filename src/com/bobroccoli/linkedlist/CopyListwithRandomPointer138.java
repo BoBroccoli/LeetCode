@@ -1,5 +1,5 @@
 package com.bobroccoli.linkedlist;
-
+//same to 138, hashmap!!!
 import java.util.HashMap;
 import java.util.Map;
 
