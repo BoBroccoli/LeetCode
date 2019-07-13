@@ -1,4 +1,4 @@
-package com.bobroccoli.substring;
+package com.bobroccoli.twopointer;
 
 import java.util.HashSet;
 import java.util.Set;
