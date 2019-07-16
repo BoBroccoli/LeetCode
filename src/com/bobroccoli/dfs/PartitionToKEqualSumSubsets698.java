@@ -2,30 +2,28 @@ package com.bobroccoli.dfs;
 
 public class PartitionToKEqualSumSubsets698 {
 	public boolean canPartitionKSubsets(int[] nums, int k) {
-		if (nums == null || nums.length == 0) {
+		if (nums == null || nums.length == 0)
 			return false;
-		}
-		int sum = 0;
-		for(int i : nums) {
-			sum += i;
-		}
-		if(sum % k != 0)
+		int total = 0;
+		for (int i : nums)
+			total += i;
+		if (total % k != 0)
 			return false;
 		boolean[] visited = new boolean[nums.length];
-		return helper(nums, visited, sum/k, k, 0, 0);
+		return helper(nums, 0, 0, total / k, 0, total, visited);
 	}
 
-	private boolean helper(int[] nums, boolean[] visited, int partial, int k, int curSum, int start) {
-		if(k == 1)
+	private boolean helper(int[] nums, int curSum, int totalSum, int part, int start, int total, boolean[] visited) {
+		if (curSum == part)
+			return helper(nums, 0, totalSum, part, 0, total, visited);
+		if (totalSum == total)
 			return true;
-		if(curSum == partial)
-			return helper(nums, visited, partial, k-1, 0, 0);
-		for(int i = start; i < nums.length; ++i) {
-			if(!visited[i] && curSum+nums[i] <= partial) {
-                visited[i] = true;
-				if(helper(nums, visited, partial, k, curSum+nums[i], start+1))
+		for (int i = start; i < nums.length; ++i) {
+			if (!visited[i] && curSum + nums[i] <= part) {
+				visited[i] = true;
+				if (helper(nums, curSum + nums[i], totalSum + nums[i], part, i + 1, total, visited))
 					return true;
-                visited[i] = false;
+				visited[i] = false;
 			}
 		}
 		return false;
