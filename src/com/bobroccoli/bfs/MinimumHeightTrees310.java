@@ -27,7 +27,6 @@ public class MinimumHeightTrees310 {
 			++degree[edges[i][0]];
 			++degree[edges[i][1]];
 		}
-		// System.out.println(degree[1]);
 		for (int i = 0; i < n; ++i) {
 			if (degree[i] == 1) {
 				queue.offer(i);
@@ -53,7 +52,6 @@ public class MinimumHeightTrees310 {
 				size--;
 			}
 		}
-		// System.out.println(Arrays.toString(degree));
 		return res;
 	}
 }
