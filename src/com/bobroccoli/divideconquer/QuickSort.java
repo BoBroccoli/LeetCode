@@ -1,40 +1,30 @@
 package com.bobroccoli.divideconquer;
 
 public class QuickSort {
-	public void quickSort(int[] arr, int l, int r) {
-		if(l >= r)
+	public void quickSort(int[] array, int left, int right) {
+		if (left >= right)
 			return;
-		int partition = partition(arr, l , r);
-		quickSort(arr, l, partition-1);
-		quickSort(arr, partition+1, r);
+		int pivot = partition(array, left, right);
+		quickSort(array, left, pivot - 1);
+		quickSort(array, pivot + 1, right);
 	}
 
-	private int partition(int[] arr, int l, int r) {
-		int left = l, right = r-1;
-		int pivot = arr[r];
-		while(left < right) {
-			while(left < right && arr[left] < pivot) {
-				++left;
-			}
-			while (right > left && arr[right] > pivot) {
-				--right;
-			}
-			if (left>=right) {
-				break;
-			}
-			else {
-				swap(left, right, arr);
-				++left;
-				--right;
+	private int partition(int[] array, int left, int right) {
+		int value = array[left];
+		int j = left;
+		for (int i = left + 1; i <= right; ++i) {
+			if (array[i] < value) {
+				++j;
+				swap(array, i, j);
 			}
 		}
-		swap(left, r, arr);
-		return left;
+		swap(array, left, j);
+		return j;
 	}
 
-	private void swap(int left, int right, int[] arr) {
-		int temp = arr[left];
-		arr[left] = arr[right];
-		arr[right] = temp;
+	private void swap(int[] array, int i, int j) {
+		int temp = array[i];
+		array[i] = array[j];
+		array[j] = temp;
 	}
 }

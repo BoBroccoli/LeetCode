@@ -1,33 +1,34 @@
 package com.bobroccoli.divideconquer;
 
-import java.util.Arrays;
-
 public class MergeSort {
-	public void mergeSort(int[] arr, int l, int r) {
-		if(l >= r)
+	public void mergeSort(int[] array, int left, int right) {
+		if (left >= right)
 			return;
-		int mid = l+(r-l)/2;
-		mergeSort(arr, l, mid);
-		mergeSort(arr, mid+1, r);
-		merge(arr, l, r);
+		int mid = left + (right - left) / 2;
+		mergeSort(array, left, mid);
+		mergeSort(array, mid + 1, right);
+		merge(array, left, right);
 	}
 
-	private void merge(int[] arr, int l, int r) {
-		int[] temp = new int[arr.length];
-		int mid = l+(r-l)/2;
-		int left = l, right = mid+1;
-		int index = l;
-		while(left <= mid && right <= r) {
-			temp[index++] = arr[left] < arr[right] ? arr[left++] : arr[right++];
+	private void merge(int[] array, int left, int right) {
+		int[] temp = new int[array.length];
+		int mid = left + (right - left) / 2;
+		int l = left, r = mid + 1, index = left;//careful about the index here! 
+		while (l < mid + 1 && r <= right) {
+			if (array[l] < array[r]) {
+				temp[index++] = array[l++];
+			} else {
+				temp[index++] = array[r++];
+			}
 		}
-		while (left <= mid) {
-			temp[index++] = arr[left++];
+		while (l <= mid) {
+			temp[index++] = array[l++];
 		}
-		while (right <= r) {
-			temp[index++] = arr[right++];
+		while (r <= right) {
+			temp[index++] = array[r++];
 		}
-		for(int i = l; i <= r; ++i) {
-			arr[i] = temp[i];
+		for(int i = left; i <= right; ++i) {
+			array[i] = temp[i];
 		}
 	}
 }
